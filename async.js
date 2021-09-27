@@ -51,3 +51,35 @@ async function fourFacts() {
 //                 response4.data]);
 //      console.log(results)
 // }
+
+async function shuffleDeck() {
+    let cardResponse = await axios.get(`http://deckofcardsapi.com/api/deck/new/draw/?count=1`);
+    console.log('we got here')
+    let cardSuit = cardResponse.data.cards[0].suit
+
+    let cardValue = cardResponse.data.cards[0].value
+
+    let deckId = cardResponse.data.deck_id
+    
+    // console.log(`${cardValue} of ${cardSuit}`)
+
+}
+
+async function getTwoCards(){
+    let cardResponse = await axios.get(`http://deckofcardsapi.com/api/deck/new/draw/?count=1`);
+    console.log(cardResponse)
+
+    let deckId = cardResponse.data.deck_id
+    
+    let card1Suit = cardResponse.data.cards[0].suit
+    let card1Value = cardResponse.data.cards[0].value
+
+    let cardResponse2 = await axios.get(`http://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
+    console.log("second response",cardResponse2)
+
+    let card2Suit = cardResponse2.data.cards[0].suit
+    let card2Value = cardResponse2.data.cards[0].value
+
+    console.log(`card 1 is a ${card1Value} of ${card1Suit}`, `card 2 is a ${card2Value} of ${card2Suit}`)
+
+}
